@@ -1,14 +1,18 @@
-# Análise de Redes do PPgEEC (2010-2025)
+# Análise Temporal de Redes de Coautoria Acadêmica
 
-Este repositório contém o código e os resultados da análise de redes de colaboração do Programa de Pós-Graduação em Engenharia Elétrica e de Computação (PPgEEC) durante o período de 2010 a 2025. A análise foi implementada em Python, utilizando bibliotecas especializadas para análise e visualização de redes.
+by
+[André Luiz Lima Souza](https://github.com/andreluizlimaa)
+[Daniel Bruno Trindade da Silva](https://github.com/daniel-trindade)
+
+***
 
 ## Visão Geral
 
-O projeto analisa as redes de colaboração acadêmica do PPgEEC, examinando a evolução das métricas de rede ao longo do tempo e explorando padrões de colaboração entre pesquisadores. A análise foi dividida em três requisitos principais:
+Neste projeto, foi realizada uma análise das redes de colaboração científica do Programa de Pós-Graduação em Engenharia Elétrica e de Computação (PPgEEC), abrangendo o período de 2010 a 2025. O estudo examinou a evolução das métricas de rede ao longo do tempo e buscou identificar padrões de colaboração entre pesquisadores.
 
-1. Análise temporal de métricas da rede
-2. Visualização das redes em períodos específicos de avaliação
-3. Análise de sub-grafos e redes ego
+O principal objetivo foi reforçar os conceitos relacionados a grafos por meio da aplicação prática da biblioteca NetworkX, da linguagem Python. Esta atividade foi desenvolvida no contexto da disciplina de **Algoritmos e Estruturas de Dados II**.
+
+***
 
 ## Ferramentas e Bibliotecas Utilizadas
 
@@ -18,69 +22,54 @@ O projeto analisa as redes de colaboração acadêmica do PPgEEC, examinando a e
 - **Matplotlib** e **Seaborn**: Para visualização de dados e gráficos
 - **NumPy**: Para operações numéricas
 
-##Estrutura do Projeto
-Trabalho-U1-Redes-Temporais-de-Co-Autoria/
-├── avaliacao_total/
-│   └── ppgeec_2010_2025.gexf  # Base geral dos dados de 2010 a 2025
-├── basedados/
-│   ├── avaliacao_geral/
-│   │   ├── ppgeec_2010_2012.gexf
-│   │   ├── ppgeec_2013_2016.gexf
-│   │   ├── ppgeec_2017_2020.gexf
-│   │   └── ppgeec_2021_2024.gexf
-│   └── anos/
-│       ├── ppgeec_2010.gexf
-│       ├── ppgeec_2011.gexf
-│       ├── ppgeec_2012.gexf
-│       └── ...  # Demais arquivos até 2025
-├── Gráficos_requisitos/
-│   ├── Requisito1/
-│   │   ├── densidade_rede.png
-│   │   ├── num_vertices.png
-│   │   ├── num_arestas.png
-│   │   ├── media_vizinhos.png
-│   │   └── distribuicao_vizinhos.png
-│   ├── Requisito2/
-│   │   ├── rede_2010_2012.png
-│   │   ├── rede_2013_2016.png
-│   │   ├── rede_2017_2020.png
-│   │   └── rede_2021_2024.png
-│   └── Requisito3/
-│       ├── subgrafo_comparacao.png
-│       └── rede_ego.png
-└── README.md
+As versões de cada uma delas pode ser encontrada no arquivo requirements.txt.
 
-## Requisito 1: Análise Temporal (2010-2025)
+***
 
-### Metodologia
+## Análise dos dados
 
-Para analisar o comportamento temporal da rede do PPgEEC, implementei as seguintes etapas:
+A análise foi dividida em três requisitos principais:
 
-1. Carreguei os dados da rede para cada ano do período 2010-2025
-2. Calculei as métricas solicitadas para cada ano:
-   - Densidade da rede
-   - Número de vértices
-   - Número de arestas
-   - Número médio de vizinhos
-   - Distribuição do número de vizinhos
-3. Gerei visualizações para cada métrica ao longo do tempo
-4. Destaquei os marcos importantes de avaliação do PPgEEC (2012, 2016, 2020, 2024)
-5. Implementação
-   -Abrir arquivo R1 que é referente ao código utilizado para geras gráficos e analises pro requisito 1.
+1. Análise temporal de métricas da rede
+2. Visualização das redes em períodos específicos de avaliação
+3. Análise de sub-grafos e redes ego
+
+vamos explicitar a metodologia de cada um deles isoladamente.
+
+### Requisito 1: Análise Temporal (2010-2025)
+
+#### Metodologia
+
+Para analisar o comportamento temporal da rede do PPgEEC, foi implementado o código R1.py que seguiu as seguintes etapas:
+
+1. Foram carregados os dados da rede para cada ano do período 2010-2025
+2. Calculado as métricas solicitadas para cada ano:
+   - Densidade da rede - Que mostra o quão colaborativo são os acadêmicos entre si.
+   - Número de vértices - Representa o Número de acadêmicos envolvidos;
+   - Número de arestas - Número de colaborações na entre acadêmicos;
+   - Número médio de vizinhos ou Gráu Médio - Quantidade média de colaborações por acadêmico;
+   - Distribuição do número de vizinhos - Mostra o quão a rede está dispersa ou se existem hubs (rede centralizada)
+3. Foi gerada as visualizações gráficas para cada métrica ao longo do tempo
+4. Foram destacados os marcos importantes de avaliação do PPgEEC (2012, 2016, 2020, 2024)
 
 
-
-### Principais Achados
+#### Principais Achados
 
 Através da análise temporal, observei os seguintes padrões:
 
-1. **Densidade da rede**: Houve um crescimento gradual até 2016, seguido de uma estabilização e posterior aumento a partir de 2020, indicando maior interconexão entre os pesquisadores do programa.
+1. **Densidade da rede**: A densidade se mantém bastante baixa durante todo o período tendo como valor médio 0.0299 ao longo dos anos. Esse comportamento é esperado em redes de colaboração científica (onde não é comum todos os acadêmicos estarem conectados entre si). Não há grandes variações nesse padão, o que sugere que, mesmo com o aumento no número de nós e arestas, a proporção de conexões possíveis que de fato ocorrem segue estável.
 
-2. **Número de vértices**: Crescimento constante ao longo dos anos, com aceleração notável após 2016, sugerindo expansão do programa e aumento no número de pesquisadores.
+2. **Número de vértices**: Crescimento consistente até 2019, indicando aumento de participantes na rede. Pequena estabilização entre 2020 e 2024, sugerindo maturidade no número de participantes. Queda significativa em 2025, o que pode ser explicado por dados incompletos.  
 
-3. **Número de arestas**: Crescimento mais acentuado que o número de vértices, especialmente após 2020, indicando maior colaboração entre os membros do programa.
+3. **Número de arestas**: Tendência de crescimento, com destaque para os períodos após as avaliações do programa (2012, 2016, 2020), possivelmente refletindo esforços para aumentar colaborações.
 
-4. **Número médio de vizinhos**: Tendência de crescimento, com destaque para os períodos após as avaliações do programa (2012, 2016, 2020), possivelmente refletindo esforços para aumentar colaborações.
+4. **Número médio de vizinhos**: Crescimento constante com uma média de 8 conexões para cada acadêmico em 2010, chegando a quase 14 conexões em média por acadêmico em 2022.
+
+<div style="color: red; font-size: 24pt">
+  Revisado até aqui
+</div>
+
+***
 
 5. **Distribuição de vizinhos**: Observou-se padrão de lei de potência típico de redes de colaboração científica, com poucos pesquisadores muito conectados e muitos com poucas conexões.
 
@@ -228,3 +217,39 @@ Possíveis extensões para este estudo incluem:
 ## Ferramentas auxiliares de ia utilizadas:
 1. ChatGPT
 2. Claude.ai
+
+
+***
+VERIFICAR SE HÁ SERVENTIA
+
+## Estrutura do Projeto
+Trabalho-U1-Redes-Temporais-de-Co-Autoria/
+├── avaliacao_total/
+│   └── ppgeec_2010_2025.gexf  # Base geral dos dados de 2010 a 2025
+├── basedados/
+│   ├── avaliacao_geral/
+│   │   ├── ppgeec_2010_2012.gexf
+│   │   ├── ppgeec_2013_2016.gexf
+│   │   ├── ppgeec_2017_2020.gexf
+│   │   └── ppgeec_2021_2024.gexf
+│   └── anos/
+│       ├── ppgeec_2010.gexf
+│       ├── ppgeec_2011.gexf
+│       ├── ppgeec_2012.gexf
+│       └── ...  # Demais arquivos até 2025
+├── Gráficos_requisitos/
+│   ├── Requisito1/
+│   │   ├── densidade_rede.png
+│   │   ├── num_vertices.png
+│   │   ├── num_arestas.png
+│   │   ├── media_vizinhos.png
+│   │   └── distribuicao_vizinhos.png
+│   ├── Requisito2/
+│   │   ├── rede_2010_2012.png
+│   │   ├── rede_2013_2016.png
+│   │   ├── rede_2017_2020.png
+│   │   └── rede_2021_2024.png
+│   └── Requisito3/
+│       ├── subgrafo_comparacao.png
+│       └── rede_ego.png
+└── README.md

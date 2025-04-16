@@ -45,7 +45,7 @@ def calcular_metricas_grafo(arquivo: str):
         densidade = nx.density(grafo)
         num_nos = grafo.number_of_nodes()
         num_arestas = grafo.number_of_edges()
-        grau_medio = sum(dict(grafo.degree()).values()) / num_nos
+        grau_medio = sum(dict(grafo.degree()).values()) / num_nos # Média de conexões por nó
         
         # Conta a distribuição dos graus usando Counter
         distribuicao_graus = Counter(dict(grafo.degree()).values())
@@ -192,11 +192,18 @@ def main():
     fig2 = plotar_ridgeline(df_degrees)
     
     # Exibe os gráficos
-    plt.show()
+    #plt.show()
     
     # Fecha as figuras para evitar reabertura desnecessária
+    #plt.close(fig1)
+    #plt.close(fig2)
+
+    fig1.savefig("metricas_temporais.png")
+    fig2.savefig("ridgeline.png")
     plt.close(fig1)
     plt.close(fig2)
+    print("Gráficos salvos com sucesso!")
+
 
 # Executa a função main se o script for executado diretamente
 if __name__ == "__main__":
