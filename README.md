@@ -46,7 +46,7 @@ Para analisar o comportamento temporal da rede do PPgEEC, foi implementado o có
 2. Calculado as métricas solicitadas para cada ano:
    - Densidade da rede - Que mostra o quão colaborativo são os acadêmicos entre si.
    - Número de vértices - Representa o Número de acadêmicos envolvidos;
-   - Número de arestas - Número de colaborações na entre acadêmicos;
+   - Número de arestas - Número de colaborações entre acadêmicos;
    - Número médio de vizinhos ou Gráu Médio - Quantidade média de colaborações por acadêmico;
    - Distribuição do número de vizinhos - Mostra o quão a rede está dispersa ou se existem hubs (rede centralizada)
 3. Foi gerada as visualizações gráficas para cada métrica ao longo do tempo
