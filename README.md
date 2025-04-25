@@ -1,7 +1,7 @@
 # Análise Temporal de Redes de Coautoria Acadêmica
 
-by
-[André Luiz Lima Souza](https://github.com/andreluizlimaa)
+by </br>
+[André Luiz Lima Souza](https://github.com/andreluizlimaa) </br>
 [Daniel Bruno Trindade da Silva](https://github.com/daniel-trindade)
 
 ***
