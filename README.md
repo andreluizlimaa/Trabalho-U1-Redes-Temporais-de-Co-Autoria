@@ -208,20 +208,9 @@ A análise da rede de colaboração do PPgEEC ao longo de 15 anos (2010-2025) re
 
 5. **Pesquisadores-ponte**: A análise de redes ego revelou pesquisadores que atuam como conectores entre diferentes grupos, contribuindo para a coesão geral da rede.
 
-## Próximos Passos
 
-Possíveis extensões para este estudo incluem:
 
-1. Análise de comunidades para identificar subáreas de pesquisa
-2. Correlação entre métricas de rede e produtividade científica
-3. Análise de redes dinâmicas para rastrear a evolução de colaborações específicas
-4. Comparação com redes de outros programas de pós-graduação similares
 
-## Instruções de Uso
-
-1. Clone este repositório
-2. Execute os notebooks na ordem numérica para reproduzir as análises
-3. Instale as bibliotecas necessárias que é pedida de para cada código.
 
 # Bibliotecas necessárias para instalar:
 1. Networkx

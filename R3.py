@@ -100,7 +100,8 @@ def visualizar_grafos(rede_geral: nx.Graph, subgrafo: nx.Graph):
     plt.title("Sub-Grafo (vértices com grau >= 80), X = 24")
     
     plt.tight_layout()
-    plt.show()
+    plt.show() 
+
 
 # =============================================================================
 # PASSO 6: Analisar a rede ego de um vértice escolhido
@@ -122,7 +123,17 @@ def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
     # Visualização da rede ego
     plt.figure(figsize=(6, 6))
     pos = nx.spring_layout(ego, seed=42)
-    nx.draw_networkx(ego, pos=pos, node_color='lightgreen', node_size=300)
+
+    nx.draw_networkx_edges(ego, pos=pos,
+                        edge_color='black',
+                        width=1.5)
+    
+    nx.draw_networkx_nodes(ego, pos=pos,
+                        node_color='#1C8394',
+                        node_size=100)
+    
+    #nx.draw_networkx_labels(ego, pos=pos, font_size=10, font_color='black')
+
     plt.title(f"Rede Ego do vértice: {no_escolhido}")
     plt.show()
     

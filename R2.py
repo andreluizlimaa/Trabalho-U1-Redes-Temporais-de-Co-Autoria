@@ -38,7 +38,10 @@ def visualizar_rede_por_periodo(arquivo_gexf, periodo):
     plt.figure(figsize=(12, 9))
 
     # Arestas
-    nx.draw_networkx_edges(G, pos, edge_color=cores_arestas, width=larguras_arestas, alpha=0.7)
+    nx.draw_networkx_edges(G, pos,
+                        edge_color=cores_arestas,
+                        width=larguras_arestas,
+                        alpha=0.7)
     
         # Nós comuns (não estão no top5)
     nos_comuns = [n for n in G.nodes() if n not in top5_nos]
@@ -62,7 +65,9 @@ def visualizar_rede_por_periodo(arquivo_gexf, periodo):
     # Top 5 nós
     nx.draw_networkx_labels(G, pos,
                             labels={n: str(n) for n in top5_nos},
-                            font_color="yellow", font_size=9, font_weight='bold')
+                            font_color="yellow",
+                            font_size=9,
+                            font_weight='bold')
 
     plt.title(f"Rede do Período {periodo}", fontsize=12)
     plt.axis("off")
