@@ -141,7 +141,7 @@ def plotar_metricas_temporais(anos: list, densidades: list, nos: list, arestas: 
     marcos = [2012, 2016, 2020, 2024]
     for i, marco in enumerate(marcos):
         plt.axvline(x=marco, color='gray', linestyle='--', linewidth=1,
-                    label=f'PPgEEC {marco}' if i == 0 else "")
+                    label=f'PPgEEC' if i == 0 else "")
         # Adiciona anotação do marco no topo do gráfico
         plt.text(marco, plt.ylim()[1]*0.46, f'{marco}', verticalalignment='top', color='gray')
     

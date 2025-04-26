@@ -8,7 +8,7 @@ by </br>
 
 ## Visão Geral
 
-Neste projeto, foi realizada uma análise das redes de colaboração científica do Programa de Pós-Graduação em Engenharia Elétrica e de Computação (PPgEEC), abrangendo o período de 2010 a 2025. O estudo examinou a evolução das métricas de rede ao longo do tempo e buscou identificar padrões de colaboração entre pesquisadores.
+Neste projeto, foi realizada uma análise das redes de colaboração científica do Programa de Pós-Graduação em Engenharia Elétrica e de Computação (PPgEEC), abrangendo o período de 2010 a 2025. O estudo examinou a evolução das métricas da rede ao longo do tempo e buscou identificar padrões de colaboração entre pesquisadores acadêmicos.
 
 O principal objetivo foi reforçar os conceitos relacionados a grafos por meio da aplicação prática da biblioteca NetworkX, da linguagem Python. Esta atividade foi desenvolvida no contexto da disciplina de **Algoritmos e Estruturas de Dados II**.
 
@@ -50,65 +50,79 @@ Para analisar o comportamento temporal da rede do PPgEEC, foi implementado o có
    - Número médio de vizinhos ou Gráu Médio - Quantidade média de colaborações por acadêmico;
    - Distribuição do número de vizinhos - Mostra o quão a rede está dispersa ou se existem hubs (rede centralizada)
 3. Foi gerada as visualizações gráficas para cada métrica ao longo do tempo
+   - Um gráfico de linhas com os cada uma das métricas expostas no item 2;
+   - Um gráfico Ridgeline que mostra a destribuição do número de conexões por pesquisador a cada ano;
 4. Foram destacados os marcos importantes de avaliação do PPgEEC (2012, 2016, 2020, 2024)
 
+##### Gráficos:
+![Métricas dos grafos ao Longo dos anos](graficos/Requisito1/Métricas%20dos%20grafos%20ao%20Longo%20dos%20anos.png)
+![Gráfico da Função de densidade de probabilidade](graficos/Requisito1/Gráfico%20da%20Função%20de%20densidade%20de%20probabilidade.png)
 
-#### Principais Achados
+#### Análise
 
-Através da análise temporal, observei os seguintes padrões:
+Através da análise temporal, foi possível observar o seguinte:
 
-1. **Densidade da rede**: A densidade se mantém bastante baixa durante todo o período tendo como valor médio 0.0299 ao longo dos anos. Esse comportamento é esperado em redes de colaboração científica (onde não é comum todos os acadêmicos estarem conectados entre si). Não há grandes variações nesse padão, o que sugere que, mesmo com o aumento no número de nós e arestas, a proporção de conexões possíveis que de fato ocorrem segue estável.
+1. **Densidade da rede**: A densidade se mantém bastante baixa durante todo o período tendo como valor médio 0.0299 ao longo dos anos. Esse comportamento é esperado em redes de colaboração científica (onde não é comum todos os acadêmicos estarem conectados entre si). Não há grandes variações nesse padão, o que sugere que, mesmo com o aumento no número de nós e arestas, ou seja, acadêmicos e produções, a proporção de conexões possíveis que de fato ocorrem segue estável.
 
-2. **Número de vértices**: Crescimento consistente até 2019, indicando aumento de participantes na rede. Pequena estabilização entre 2020 e 2024, sugerindo maturidade no número de participantes. Queda significativa em 2025, o que pode ser explicado por dados incompletos.  
+2. **Número de Nós (Acadêmicos)**: Crescimento consistente até 2019, indicando aumento de participantes na rede. Pequena estabilização entre 2020 e 2024, sugerindo maturidade no número de participantes. Queda significativa em 2025, o que pode ser explicado por dados incompletos.  
 
-3. **Número de arestas**: Tendência de crescimento, com destaque para os períodos após as avaliações do programa (2012, 2016, 2020), possivelmente refletindo esforços para aumentar colaborações.
+3. **Número de arestas (Produções em conjunto)**: Tendência de crescimento, com destaque para os períodos após as avaliações do programa (2012, 2016, 2020), possivelmente refletindo esforços para aumentar colaborações.
 
 4. **Número médio de vizinhos**: Crescimento constante com uma média de 8 conexões para cada acadêmico em 2010, chegando a quase 14 conexões em média por acadêmico em 2022.
 
-<div style="color: red; font-size: 24pt">
-  Revisado até aqui
-</div>
+Já no gráfico Ridgeline observamos que
+ 1. As curvas possuem um leve deslocamento para a direita, isso demonstra que ao longo dos anos os pesquisadores passaram a ter mais colaborações;
+ 2. A forma das distribuições mostra que, na maioria dos anos, a maior parte dos pesquisadores tem grau pequeno, com poucos tendo graus muito altos (comportamento típico de redes reais, como as de colaboração científica).
 
-***
+ #### Dificuldades enfrentadas:
 
-5. **Distribuição de vizinhos**: Observou-se padrão de lei de potência típico de redes de colaboração científica, com poucos pesquisadores muito conectados e muitos com poucas conexões.
-
-### Dificuldades e Hipóteses
-
-**Dificuldades enfrentadas**:
 - Tratamento de dados inconsistentes em alguns anos
 - Escolha da escala adequada para visualizar métricas com diferentes ordens de grandeza
 - Definição do melhor parâmetro para coloração dos histogramas
 
-**Hipóteses**:
-- O aumento na densidade e no número médio de vizinhos após os períodos de avaliação sugere que há um incentivo à colaboração após cada ciclo avaliativo
-- Os picos de crescimento em 2016 e 2020 podem estar relacionados a políticas institucionais específicas ou a mudanças nos critérios de avaliação da CAPES
-- A presença de "hubs" na rede (pesquisadores com muitas conexões) indica uma estrutura hierárquica nas colaborações do programa
 
-## Requisito 2: Visualização das Redes por Período de Avaliação
+#### Conclusão
 
-### Metodologia
+- O aumento na densidade e no número médio de vizinhos após os períodos de avaliação sugere que há um incentivo à colaboração após cada ciclo avaliativo;
+- Houve um crescimento na rede de colaboração do PPgEEC entre 2010 e 2019, com aumento no número de participantes (nós) e colaborações (arestas).
+- O grau médio e a densidade mantiveram-se estáveis ou cresceram levemente, o que indica uma melhoria na integração dos pesquisadores.
+- Os picos de grau médio e número de arestas podem estar associados a eventos institucionais, como reestruturações ou incentivos à pesquisa colaborativa.
+- A distribuição dos graus mostra que a maioria dos pesquisadores tem poucas conexões, enquanto poucos atuam como hubs (nós muito conectados), padrão típico em redes científicas.
+### Requisito 2: Visualização das Redes por Período de Avaliação
 
-Para visualizar as redes nos períodos de avaliação do PPgEEC, implementei:
+#### Metodologia
 
-1. Agregação dos dados de rede em quatro períodos:
+Para visualizar as redes nos períodos de avaliação do PPgEEC, implementamos:
+
+1. Agregação dos dados de rede em quatro períodos (Períodos de avaliação do programa):
    - 2010-2012
    - 2013-2016
    - 2017-2020
    - 2021-2024
 
 2. Aplicação dos parâmetros de visualização:
-   - Tamanho do vértice proporcional ao número de vizinhos
+   - Raio dos vértices proporcional ao número de vizinhos
    - Destaque para os 5 vértices com mais vizinhos
    - Cor das arestas: vermelha para conexões entre membros permanentes, preta para as demais
    - Largura da aresta proporcional ao número de citações
 
 3. Implementação
-   -Abrir arquivo R1 que é referente ao código utilizado para geras gráficos e analises pro requisito 1.
+   - O código utilizado para gerar os grafos se enncontram no aqrquivo R2.py;
 
-### Principais Achados
+##### Gráfos:
 
-Após analisar as visualizações para cada período, identifiquei:
+- Período 2010-2012
+![Período 2010-2012](graficos/Requisito2/rede_2010-2012.png)
+- Período 2013-2016
+![Período 2010-2012](graficos/Requisito2/rede_2013-2016.png)
+- Período 2017-2020
+![Período 2010-2012](graficos/Requisito2/rede_2017-2020.png)
+- Período 2021-2024
+![Período 2010-2012](graficos/Requisito2/rede_2021-2024.png)
+
+#### Análise
+
+Após analisar as visualizações para cada período, foi identificado:
 
 1. **Período 2010-2012**: Rede ainda esparsa com poucos membros permanentes colaborando entre si. Os top 5 vértices apresentam conexões limitadas, sugerindo um programa em fase inicial de desenvolvimento.
 
@@ -118,17 +132,19 @@ Após analisar as visualizações para cada período, identifiquei:
 
 4. **Período 2021-2024**: Rede densamente conectada com múltiplas comunidades. Arestas significativamente mais espessas entre os principais pesquisadores, indicando colaborações com alto impacto (muitas citações).
 
-### Dificuldades e Hipóteses
-
-**Dificuldades enfrentadas**:
+#### Dificuldades
 - Visualização de redes muito densas nos períodos mais recentes
 - Escolha de layout adequado para representar a estrutura da rede sem sobreposições
 - Calibração dos parâmetros visuais (tamanho dos nós, espessura das arestas) para manter legibilidade
 
-**Hipóteses**:
+#### Conclusão:
 - A evolução da rede sugere um programa que evoluiu de grupos isolados para uma estrutura mais integrada
 - A concentração de colaborações em torno de poucos pesquisadores (top 5) pode indicar lideranças científicas consolidadas
 - O aumento de arestas vermelhas ao longo do tempo sugere uma política bem-sucedida de integração entre membros permanentes
+
+<div style="color: red; font-size: 24pt">
+  Revisado até aqui
+</div>
 
 ## Requisito 3: Análise de Sub-grafo e Rede Ego
 
@@ -217,39 +233,3 @@ Possíveis extensões para este estudo incluem:
 ## Ferramentas auxiliares de ia utilizadas:
 1. ChatGPT
 2. Claude.ai
-
-
-***
-VERIFICAR SE HÁ SERVENTIA
-
-## Estrutura do Projeto
-Trabalho-U1-Redes-Temporais-de-Co-Autoria/
-├── avaliacao_total/
-│   └── ppgeec_2010_2025.gexf  # Base geral dos dados de 2010 a 2025
-├── basedados/
-│   ├── avaliacao_geral/
-│   │   ├── ppgeec_2010_2012.gexf
-│   │   ├── ppgeec_2013_2016.gexf
-│   │   ├── ppgeec_2017_2020.gexf
-│   │   └── ppgeec_2021_2024.gexf
-│   └── anos/
-│       ├── ppgeec_2010.gexf
-│       ├── ppgeec_2011.gexf
-│       ├── ppgeec_2012.gexf
-│       └── ...  # Demais arquivos até 2025
-├── Gráficos_requisitos/
-│   ├── Requisito1/
-│   │   ├── densidade_rede.png
-│   │   ├── num_vertices.png
-│   │   ├── num_arestas.png
-│   │   ├── media_vizinhos.png
-│   │   └── distribuicao_vizinhos.png
-│   ├── Requisito2/
-│   │   ├── rede_2010_2012.png
-│   │   ├── rede_2013_2016.png
-│   │   ├── rede_2017_2020.png
-│   │   └── rede_2021_2024.png
-│   └── Requisito3/
-│       ├── subgrafo_comparacao.png
-│       └── rede_ego.png
-└── README.md

@@ -32,17 +32,32 @@ def visualizar_rede_por_periodo(arquivo_gexf, periodo):
         cores_arestas.append(cor)
 
         citacoes = dados.get("citation_num", 1)
-        larguras_arestas.append(float(citacoes) / 2.5)
+        larguras_arestas.append(float(citacoes)/10)
 
     # Plotagem
     plt.figure(figsize=(12, 9))
 
     # Arestas
     nx.draw_networkx_edges(G, pos, edge_color=cores_arestas, width=larguras_arestas, alpha=0.7)
+    
+        # Nós comuns (não estão no top5)
+    nos_comuns = [n for n in G.nodes() if n not in top5_nos]
+    nx.draw_networkx_nodes(G, pos,
+                        nodelist=nos_comuns,
+                        node_color="#1C8394",
+                        edgecolors='#1C8394',
+                        linewidths=0.8,
+                        node_size=[tamanhos[i] for i, n in enumerate(G.nodes()) if n in nos_comuns],
+                        alpha=0.6)
 
-    # Nós com borda
-    nx.draw_networkx_nodes(G, pos, node_color="skyblue", edgecolors='black',
-                           linewidths=0.8, node_size=tamanhos)
+    # Top 5 nós (com outra cor)
+    nx.draw_networkx_nodes(G, pos,
+                        nodelist=top5_nos,
+                        node_color="#390D02",    # <<< Aqui define a cor dos top 5
+                        edgecolors='#A52502',
+                        linewidths=1.0,
+                        node_size=[tamanhos[i] for i, n in enumerate(G.nodes()) if n in top5_nos],
+                        alpha=1.0)
 
     # Top 5 nós
     nx.draw_networkx_labels(G, pos,
