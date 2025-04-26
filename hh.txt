@@ -1,3 +1,0 @@
-    nx.draw_networkx(ego, pos=pos,
-                    node_color='lightgreen',
-                    node_size=300)

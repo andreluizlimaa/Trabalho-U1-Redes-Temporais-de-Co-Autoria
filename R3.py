@@ -84,6 +84,7 @@ def comparar_densidade(rede_geral: nx.Graph, subgrafo: nx.Graph):
 # =============================================================================
 # PASSO 5: Visualizar a rede geral e o sub-grafo
 # =============================================================================
+
 def visualizar_grafos(rede_geral: nx.Graph, subgrafo: nx.Graph):
     # Utiliza o mesmo layout para facilitar comparação
     pos = nx.spring_layout(rede_geral, seed=42)  # fixa o seed para consistência
@@ -91,22 +92,48 @@ def visualizar_grafos(rede_geral: nx.Graph, subgrafo: nx.Graph):
     
     # Plotando a rede geral
     plt.subplot(1, 2, 1)
-    nx.draw_networkx(rede_geral, pos=pos, node_size=20, with_labels=False)
-    plt.title("Rede Geral (2010-2025)")
+    # Arestas
+    nx.draw_networkx_edges(rede_geral, pos=pos,
+                        edge_color='black',
+                        width=0.5,
+                        alpha=0.5)
+    # Nós
+    nx.draw_networkx_nodes(rede_geral, pos=pos,
+                        node_color="#1C8394",
+                        node_size=20,
+                        alpha=0.6,
+                        edgecolors='#1C8394',
+                        linewidths=0.5)
     
+    # Labels (não exibido para não poluir)
+    plt.title("Rede Geral (2010-2025)", fontsize=12)
+
     # Plotando o sub-grafo
     plt.subplot(1, 2, 2)
-    nx.draw_networkx(subgrafo, pos=pos, node_size=40, with_labels=False)
-    plt.title("Sub-Grafo (vértices com grau >= 80), X = 24")
+    # Arestas
+    nx.draw_networkx_edges(subgrafo, pos=pos,
+                           edge_color='black',
+                           width=0.8,
+                           alpha=0.7)
+    # Nós
+    nx.draw_networkx_nodes(subgrafo, pos=pos,
+                        node_color="#390D02",
+                        node_size=40,
+                        alpha=0.9, 
+                        edgecolors='#A52502',
+                        linewidths=0.8)
+    
+    # Labels (também oculto)
+    plt.title("Sub-Grafo (vértices com grau >= 80), X = 24", fontsize=12)
     
     plt.tight_layout()
-    plt.show() 
+    plt.show()
 
 
 # =============================================================================
 # PASSO 6: Analisar a rede ego de um vértice escolhido
 # =============================================================================
-def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
+""" def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
     # Se nenhum nodo for especificado, escolhe o de maior grau
     if no_escolhido is None:
         no_escolhido = max(rede_geral.degree, key=lambda x: x[1])[0]
@@ -130,7 +157,8 @@ def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
     
     nx.draw_networkx_nodes(ego, pos=pos,
                         node_color='#1C8394',
-                        node_size=100)
+                        alpha=0.8,
+                        node_size=50)
     
     #nx.draw_networkx_labels(ego, pos=pos, font_size=10, font_color='black')
 
@@ -138,6 +166,74 @@ def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
     plt.show()
     
     return ego
+ """
+
+def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
+    # Se nenhum nodo for especificado, escolhe o de maior grau
+    if no_escolhido is None:
+        no_escolhido = max(rede_geral.degree, key=lambda x: x[1])[0]
+    ego = nx.ego_graph(rede_geral, no_escolhido)
+
+    # Calcula métricas básicas
+    grau_nodo = rede_geral.degree[no_escolhido]
+    densidade_ego = nx.density(ego)
+    num_nos = ego.number_of_nodes()
+    num_arestas = ego.number_of_edges()
+    grau_medio = sum(dict(ego.degree()).values()) / num_nos
+    clustering_medio = nx.average_clustering(ego)
+
+    # Tenta calcular o diâmetro (só se o grafo for conexo)
+    try:
+        diametro = nx.diameter(ego)
+    except nx.exception.NetworkXError:
+        diametro = "Grafo não conexo"
+
+    vizinhos = list(ego.neighbors(no_escolhido))
+
+    print(f"--- Análise da Rede Ego ---")
+    print(f"Nó escolhido: {no_escolhido}")
+    print(f"Grau do nodo na rede geral: {grau_nodo}")
+    print(f"Número de nós na rede ego: {num_nos}")
+    print(f"Número de arestas na rede ego: {num_arestas}")
+    print(f"Grau médio: {grau_medio:.2f}")
+    print(f"Densidade: {densidade_ego:.4f}")
+    print(f"Clustering médio: {clustering_medio:.4f}")
+    print(f"Diâmetro: {diametro}")
+    print(f"Vizinhos do nó: {vizinhos}")
+
+    # Visualização
+    plt.figure(figsize=(6, 6))
+    pos = nx.spring_layout(ego, seed=42)
+
+    # Destaca o nó central
+    node_colors = []
+    for node in ego.nodes():
+        if node == no_escolhido:
+            node_colors.append('#FF5733')  # Cor especial para o centro
+        else:
+            node_colors.append('#1C8394')  # Outros nós
+
+    nx.draw_networkx_edges(ego, pos=pos, edge_color='black', width=1.5)
+    nx.draw_networkx_nodes(ego, pos=pos, node_color=node_colors, alpha=0.8, node_size=80)
+
+    plt.title(f"Rede Ego do vértice: {no_escolhido}")
+    plt.axis('off')
+    plt.show()
+
+    # Retorna o grafo e informações úteis
+    info = {
+        "no_central": no_escolhido,
+        "grau_no_geral": grau_nodo,
+        "num_nos": num_nos,
+        "num_arestas": num_arestas,
+        "grau_medio": grau_medio,
+        "densidade": densidade_ego,
+        "clustering_medio": clustering_medio,
+        "diametro": diametro,
+        "vizinhos": vizinhos
+    }
+
+    return ego, info
 
 # =============================================================================
 # MAIN: Execução do script expandido
@@ -168,7 +264,7 @@ def main_expanded():
     visualizar_grafos(rede_geral, subgrafo)
     
     # Analisar a rede ego de um vértice escolhido (o de maior grau por padrão)
-    analisar_rede_ego(rede_geral)
+    analisar_rede_ego(rede_geral, no_escolhido="36537969500")
     
     # INTERPRETAÇÃO DOS RESULTADOS:
     #
