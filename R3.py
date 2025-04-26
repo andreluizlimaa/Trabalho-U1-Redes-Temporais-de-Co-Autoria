@@ -133,107 +133,51 @@ def visualizar_grafos(rede_geral: nx.Graph, subgrafo: nx.Graph):
 # =============================================================================
 # PASSO 6: Analisar a rede ego de um vértice escolhido
 # =============================================================================
-""" def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
-    # Se nenhum nodo for especificado, escolhe o de maior grau
-    if no_escolhido is None:
-        no_escolhido = max(rede_geral.degree, key=lambda x: x[1])[0]
-    ego = nx.ego_graph(rede_geral, no_escolhido)
-    
-    # Calcula métricas básicas para a rede ego
-    grau_nodo = rede_geral.degree[no_escolhido]
-    densidade_ego = nx.density(ego)
-    
-    print(f"Nó escolhido: {no_escolhido}")
-    print(f"Grau do nodo na rede geral: {grau_nodo}")
-    print(f"Densidade da rede ego: {densidade_ego:.4f}")
-    
-    # Visualização da rede ego
-    plt.figure(figsize=(6, 6))
-    pos = nx.spring_layout(ego, seed=42)
-
-    nx.draw_networkx_edges(ego, pos=pos,
-                        edge_color='black',
-                        width=1.5)
-    
-    nx.draw_networkx_nodes(ego, pos=pos,
-                        node_color='#1C8394',
-                        alpha=0.8,
-                        node_size=50)
-    
-    #nx.draw_networkx_labels(ego, pos=pos, font_size=10, font_color='black')
-
-    plt.title(f"Rede Ego do vértice: {no_escolhido}")
-    plt.show()
-    
-    return ego
- """
 
 def analisar_rede_ego(rede_geral: nx.Graph, no_escolhido=None):
-    # Se nenhum nodo for especificado, escolhe o de maior grau
+    import matplotlib.pyplot as plt
+    import networkx as nx
+
     if no_escolhido is None:
         no_escolhido = max(rede_geral.degree, key=lambda x: x[1])[0]
+
     ego = nx.ego_graph(rede_geral, no_escolhido)
 
-    # Calcula métricas básicas
-    grau_nodo = rede_geral.degree[no_escolhido]
-    densidade_ego = nx.density(ego)
-    num_nos = ego.number_of_nodes()
-    num_arestas = ego.number_of_edges()
-    grau_medio = sum(dict(ego.degree()).values()) / num_nos
-    clustering_medio = nx.average_clustering(ego)
-
-    # Tenta calcular o diâmetro (só se o grafo for conexo)
-    try:
-        diametro = nx.diameter(ego)
-    except nx.exception.NetworkXError:
-        diametro = "Grafo não conexo"
-
-    vizinhos = list(ego.neighbors(no_escolhido))
-
-    print(f"--- Análise da Rede Ego ---")
-    print(f"Nó escolhido: {no_escolhido}")
-    print(f"Grau do nodo na rede geral: {grau_nodo}")
-    print(f"Número de nós na rede ego: {num_nos}")
-    print(f"Número de arestas na rede ego: {num_arestas}")
-    print(f"Grau médio: {grau_medio:.2f}")
-    print(f"Densidade: {densidade_ego:.4f}")
-    print(f"Clustering médio: {clustering_medio:.4f}")
-    print(f"Diâmetro: {diametro}")
-    print(f"Vizinhos do nó: {vizinhos}")
-
-    # Visualização
-    plt.figure(figsize=(6, 6))
     pos = nx.spring_layout(ego, seed=42)
 
-    # Destaca o nó central
+    # Define cores e tamanhos
     node_colors = []
+    node_sizes = []
     for node in ego.nodes():
         if node == no_escolhido:
-            node_colors.append('#FF5733')  # Cor especial para o centro
+            node_colors.append('#FFA500')
+            node_sizes.append(600)
         else:
-            node_colors.append('#1C8394')  # Outros nós
+            node_colors.append('#1C8394')
+            grau = ego.degree[node]
+            node_sizes.append(100 + grau * 20)
 
-    nx.draw_networkx_edges(ego, pos=pos, edge_color='black', width=1.5)
-    nx.draw_networkx_nodes(ego, pos=pos, node_color=node_colors, alpha=0.8, node_size=80)
+    # Desenha as arestas
+    plt.figure(figsize=(8, 8))
+    nx.draw_networkx_edges(ego, pos,
+                           edge_color='black',
+                           width=1.5,
+                           alpha=0.7)
 
-    plt.title(f"Rede Ego do vértice: {no_escolhido}")
+    # Desenha os nós
+    nx.draw_networkx_nodes(ego, pos,
+                           node_color=node_colors,
+                           alpha=0.8,
+                           node_size=node_sizes,
+                           edgecolors='black',
+                           linewidths=1.5)
+    
+    plt.title(f"Rede Ego do Vertice: {no_escolhido}", fontsize=16)
     plt.axis('off')
     plt.show()
 
-    # Retorna o grafo e informações úteis
-    info = {
-        "no_central": no_escolhido,
-        "grau_no_geral": grau_nodo,
-        "num_nos": num_nos,
-        "num_arestas": num_arestas,
-        "grau_medio": grau_medio,
-        "densidade": densidade_ego,
-        "clustering_medio": clustering_medio,
-        "diametro": diametro,
-        "vizinhos": vizinhos
-    }
+    return ego
 
-    return ego, info
 
 # =============================================================================
 # MAIN: Execução do script expandido
@@ -264,30 +208,8 @@ def main_expanded():
     visualizar_grafos(rede_geral, subgrafo)
     
     # Analisar a rede ego de um vértice escolhido (o de maior grau por padrão)
-    analisar_rede_ego(rede_geral, no_escolhido="36537969500")
+    analisar_rede_ego(rede_geral, no_escolhido="57214422700")
     
-    # INTERPRETAÇÃO DOS RESULTADOS:
-    #
-    # 1. **Definição de X:**  
-    #    Ao definir X como o percentil 80 dos graus, estamos considerando que os vértices com 
-    #    conectividade acima desse valor representam os nós “centrales” ou de alta influência.  
-    #
-    # 2. **Densidade:**  
-    #    A comparação entre a densidade da rede geral e a do sub-grafo pode revelar se os nós 
-    #    com alta conectividade formam um “core” bem interligado. Se a densidade do sub-grafo for 
-    #    significativamente maior, isso indica que estes nós mantêm muitas conexões entre si, 
-    #    formando um núcleo coeso.
-    #
-    # 3. **Visualização:**  
-    #    Ao plotar as duas redes lado a lado, nota-se visualmente que o sub-grafo tende a ser mais 
-    #    compacto e com maior interconectividade entre os nós destacados, em contraste com a rede
-    #    geral que pode conter comunidades mais dispersas.
-    #
-    # 4. **Rede Ego:**  
-    #    A análise da rede ego de um vértice (o de maior grau, por exemplo) nos revela a vizinhança 
-    #    imediata deste nó e como seus vizinhos se conectam entre si. Uma alta densidade nessa rede 
-    #    pode indicar que o nó está inserido em um cluster forte, potencialmente funcionando como 
-    #    um hub que facilita a comunicação entre diferentes partes da rede.
     
 if __name__ == "__main__":
     main_expanded()

@@ -142,46 +142,45 @@ Após analisar as visualizações para cada período, foi identificado:
 - A concentração de colaborações em torno de poucos pesquisadores (top 5) pode indicar lideranças científicas consolidadas
 - O aumento de arestas vermelhas ao longo do tempo sugere uma política bem-sucedida de integração entre membros permanentes
 
-<div style="color: red; font-size: 24pt">
-  Revisado até aqui
-</div>
+### Requisito 3: Análise de Sub-grafo e Rede Ego
 
-## Requisito 3: Análise de Sub-grafo e Rede Ego
+#### Metodologia
 
-### Metodologia
+Para uma melhor avaliarmos o potencial do trabalho com grafos foram solicitados 3 grafos, são eles:
+1. Um grafo da rede geral
+2. Um sub-grafo a partir da rede geral (2010 - 2025) contendo apenas vértices que possuem pelo menos _x_ vizinhos.
+3. O Grafo de uma rede de ego de um vertice da rede;
 
-Para gerar e analisar o sub-grafo e a rede ego, implementei:
+Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de estudo, juntamente com a matplotlib
 
-1. Desenvolvimento de uma metodologia para definir o limiar X (número mínimo de vizinhos):
-   - Calculei a média e o desvio padrão do número de vizinhos na rede geral
-   - Defini X como a média mais um desvio padrão, identificando os vértices acima da média
+1. Gráfico geral:
+![Grafo da Rede Geral](/graficos/Requisito3/grafo-geral.png)
 
-2. Geração do sub-grafo contendo apenas os vértices com X ou mais vizinhos
+2. Sub-Grafo
+- Para definição do valor mínimo de vizinhos _x_, adotou-se a metodologia baseada no percentil 80 da distribuição de graus da rede geral. Assim, consideramos apenas os 20% nós mais conectados, focando a análise nos vértices centrais com maior potencial de influência e conectividade.
 
-3. Comparação da densidade entre o grafo geral e o sub-grafo
+![Sub-grafo com os 20% mais conectados](/graficos/Requisito3/Sub-Grafo%20%2080png)
 
-4. Seleção de um vértice representativo e análise da sua rede ego (rede formada pelo vértice e seus vizinhos diretos)
+3. Para a rede-ego foi escolhido um no que possuisse uma forte conexão com seus vizinhos e que houvesse um número equilibrado de conexões para facilitar a visualização. Nesse frafo também diferimos os tamanhos dos nós para que eles demonstrassem o grau que possuem.
 
-5. Implementação
-   -Abrir arquivo R3 que é referente ao código utilizado para geras gráficos e analises pro requisito 3.
-
+![Rede-Ego](/graficos/Requisito3/rede_ego_Kleyton.png)
 ### Principais Achados
 
-Os resultados dessa análise revelaram:
+1. **Grafo Geral** 
+- Foi possível observar que o meio da rede está super denso, cheio de conexões entre os nós. Isso sugere a presença de vários hubs (nós muito conectados) ou comunidades sobrepostas. Pode também representar um núcleo principal de interações ou colaborações intensas;
+- Foi possível perceber também a existencia de nós periféricos com poucos vizinhos, o que indica a existencia de participantes com pouca interação;
+- A diferença entre o núcleo denso e a periferia sugere que talvez sua rede siga uma distribuição de graus do tipo "power-law", ou seja, poucos nós com muitas conexões e muitos nós com poucas, isso é algo muito comum em redes sociais, científicas, etc.
 
-1. **Definição do limiar X**: Após calcular a média e o desvio padrão, determinei X = 12 vizinhos como ponto de corte para identificar pesquisadores altamente conectados.
+2. **Subgrafo**
+- Tomamos os 20% nós mais conectados da rede geral para formar o subgrafo, com isso podemos podemos ver como os principais vertices, ou seja, os principais acadêmicos dessa rede se interconectão e como é a interação entre eles.
 
-2. **Comparação de densidades**:
-   - Densidade da rede geral: 0.021
-   - Densidade do sub-grafo: 0.156
-   
-   A diferença significativa (aproximadamente 7 vezes maior) indica que os pesquisadores mais conectados formam um núcleo coeso dentro da rede maior.
+3. **Rede-Ego** 
+- O nó central está muito bem conectado, visualmente, ele se conecta com quase todos os nós ao seu redor. Os nós ao redor também estão muito interconectados entre si, formando uma rede bastante densa. Isso indica que não é só o central que conecta os vizinhos também têm fortes conexões diretas entre si. Em termos de rede, isso reflete alta coesão (pessoas que são próximas entre si, formando um cluster compacto).
 
-3. **Análise da rede ego**: Selecionei o pesquisador com maior número de conexões para análise da rede ego. Observei:
-   - Alto coeficiente de clustering (0.412), indicando que muitos dos vizinhos deste pesquisador também colaboram entre si
-   - Presença de "pontes" na rede ego, conectando grupos distintos de pesquisadores
-   - Distribuição heterogênea de intensidade de colaboração (citações)
 
+***
+
+#  falta revisar
 ### Dificuldades e Hipóteses
 
 **Dificuldades enfrentadas**:
