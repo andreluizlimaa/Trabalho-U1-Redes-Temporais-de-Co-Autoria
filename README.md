@@ -107,7 +107,7 @@ Para visualizar as redes nos períodos de avaliação do PPgEEC, implementamos:
    - Largura da aresta proporcional ao número de citações
 
 3. Implementação
-   - O código utilizado para gerar os grafos se enncontram no aqrquivo R2.py;
+   - O código utilizado para gerar os grafos se encontram no arquivo R2.py;
 
 ##### Gráfos:
 
@@ -151,7 +151,7 @@ Para uma melhor avaliarmos o potencial do trabalho com grafos foram solicitados 
 2. Um sub-grafo a partir da rede geral (2010 - 2025) contendo apenas vértices que possuem pelo menos _x_ vizinhos.
 3. O Grafo de uma rede de ego de um vertice da rede;
 
-Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de estudo, juntamente com a matplotlib
+Para gerar esses grafos foi utilizados as bibliotecas NetworkX que é objeto de estudo, juntamente com a matplotlib
 
 1. Gráfico geral:
 ![Grafo da Rede Geral](/graficos/Requisito3/grafo-geral.png)
@@ -161,7 +161,7 @@ Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de 
 
 ![Sub-grafo com os 20% mais conectados](/graficos/Requisito3/Sub-Grafo%20%2080png)
 
-3. Para a rede-ego foi escolhido um no que possuisse uma forte conexão com seus vizinhos e que houvesse um número equilibrado de conexões para facilitar a visualização. Nesse frafo também diferimos os tamanhos dos nós para que eles demonstrassem o grau que possuem.
+3. Para a rede-ego foi escolhido um no que possuisse uma forte conexão com seus vizinhos e que houvesse um número equilibrado de conexões para facilitar a visualização. Nesse grafo também diferimos os tamanhos dos nós para que eles demonstrassem o grau que possuem.
 
 ![Rede-Ego](/graficos/Requisito3/rede-ego.png)
 #### Principais Achados
@@ -169,7 +169,7 @@ Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de 
 1. **Grafo Geral** 
 - Foi possível observar que o meio da rede está super denso, cheio de conexões entre os nós. Isso sugere a presença de vários hubs (nós muito conectados) ou comunidades sobrepostas. Pode também representar um núcleo principal de interações ou colaborações intensas;
 - Foi possível perceber também a existencia de nós periféricos com poucos vizinhos, o que indica a existencia de participantes com pouca interação;
-- A diferença entre o núcleo denso e a periferia sugere que talvez sua rede siga uma distribuição de graus do tipo "power-law", ou seja, poucos nós com muitas conexões e muitos nós com poucas, isso é algo muito comum em redes sociais, científicas, etc.
+- A diferença entre o núcleo denso e a periferia sugere que a rede siga uma distribuição de graus do tipo "power-law", ou seja, poucos nós com muitas conexões e muitos nós com poucas, sendo algo muito comum em redes sociais, científicas, etc.
 
 2. **Subgrafo**
 - Tomamos os 20% nós mais conectados da rede geral para formar o subgrafo, com isso podemos podemos ver como os principais vertices, ou seja, os principais acadêmicos dessa rede se interconectão e como é a interação entre eles.
