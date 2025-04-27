@@ -163,8 +163,8 @@ Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de 
 
 3. Para a rede-ego foi escolhido um no que possuisse uma forte conexão com seus vizinhos e que houvesse um número equilibrado de conexões para facilitar a visualização. Nesse frafo também diferimos os tamanhos dos nós para que eles demonstrassem o grau que possuem.
 
-![Rede-Ego](/graficos/Requisito3/rede_ego_Kleyton.png)
-### Principais Achados
+![Rede-Ego](/graficos/Requisito3/rede-ego.png)
+#### Principais Achados
 
 1. **Grafo Geral** 
 - Foi possível observar que o meio da rede está super denso, cheio de conexões entre os nós. Isso sugere a presença de vários hubs (nós muito conectados) ou comunidades sobrepostas. Pode também representar um núcleo principal de interações ou colaborações intensas;
@@ -178,12 +178,7 @@ Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de 
 - O nó central está muito bem conectado, visualmente, ele se conecta com quase todos os nós ao seu redor. Os nós ao redor também estão muito interconectados entre si, formando uma rede bastante densa. Isso indica que não é só o central que conecta os vizinhos também têm fortes conexões diretas entre si. Em termos de rede, isso reflete alta coesão (pessoas que são próximas entre si, formando um cluster compacto).
 
 
-***
-
-#  falta revisar
-### Dificuldades e Hipóteses
-
-**Dificuldades enfrentadas**:
+#### Dificuldades enfrentadas:
 - Definição de um critério adequado para o limiar X que fosse significativo para o contexto do programa
 - Visualização clara da rede ego devido ao grande número de conexões
 - Interpretação da densidade comparativa considerando as diferenças estruturais entre os grafos
@@ -191,33 +186,15 @@ Para gerar esses grafos foi utilizamos as bibliotecas NetworkX que é objeto de 
 **Hipóteses**:
 - O sub-grafo identificado pode representar o "núcleo científico" do programa, responsável pela maior parte da produção
 - A alta densidade do sub-grafo sugere um grupo coeso de pesquisadores, possivelmente com áreas de pesquisa sobrepostas
-- A estrutura da rede ego analisada indica um pesquisador que atua como "ponte" entre diferentes grupos de pesquisa
 
-## Conclusões Gerais
+### Conclusões Gerais
 
-A análise da rede de colaboração do PPgEEC ao longo de 15 anos (2010-2025) revelou:
+O estudo da rede de coautoria do Programa de Pós-Graduação em Engenharia Elétrica e de Computação (PPgEEC), ao longo do período de 2010 a 2025, permitiu uma compreensão aprofundada da dinâmica de colaboração acadêmica dentro do programa. Através da análise temporal, da visualização em períodos estratégicos e da avaliação de subgrafos e redes ego, foi possível identificar padrões relevantes sobre o crescimento, a estrutura e a evolução da rede.
 
-1. **Evolução consistente**: O programa demonstrou crescimento constante em número de pesquisadores e colaborações, com aceleração nos períodos recentes.
+Observou-se um crescimento consistente tanto no número de participantes quanto nas colaborações ao longo dos anos, com períodos de intensificação relacionados diretamente às avaliações institucionais. A análise das métricas mostrou que, embora a densidade da rede se mantenha relativamente baixa (como é típico em redes científicas), o grau médio e o número de colaborações aumentaram, indicando maior integração entre os pesquisadores.
 
-2. **Impacto das avaliações**: Os períodos após cada avaliação (2012, 2016, 2020) foram marcados por mudanças estruturais na rede, sugerindo resposta às políticas de incentivo à colaboração.
+A evolução da rede revelou também a formação de um núcleo científico coeso, composto pelos pesquisadores mais conectados, responsáveis por boa parte da produção acadêmica. As visualizações dos subgrafos e das redes ego confirmaram a existência de lideranças consolidadas, hubs de colaboração e uma estrutura de comunidades bem definida, características típicas de redes reais de colaboração científica.
 
-3. **Formação de comunidades**: A rede evoluiu de grupos isolados para uma estrutura mais integrada, com aumento significativo na colaboração entre membros permanentes.
+Além disso, a análise das redes ego destacou a importância dos pesquisadores que atuam como "pontes" entre diferentes grupos, essenciais para a manutenção da coesão e para a disseminação de informações na rede. Tais achados reforçam a ideia de que a posição estrutural dos nós é determinante para o comportamento e a resiliência da rede.
 
-4. **Núcleo coeso**: Identificamos um sub-grafo de pesquisadores altamente conectados que forma um núcleo científico coeso dentro do programa.
-
-5. **Pesquisadores-ponte**: A análise de redes ego revelou pesquisadores que atuam como conectores entre diferentes grupos, contribuindo para a coesão geral da rede.
-
-
-
-
-
-# Bibliotecas necessárias para instalar:
-1. Networkx
-2. Pandas
-3. Joypy
-4. Seaborn
-5. Matplotlib
-
-## Ferramentas auxiliares de ia utilizadas:
-1. ChatGPT
-2. Claude.ai
+Este trabalho, além de permitir a aplicação prática dos conceitos de grafos e da biblioteca NetworkX, ofereceu uma visão valiosa sobre o funcionamento interno de redes de colaboração acadêmica. Os resultados obtidos podem servir como base para estratégias futuras de fortalecimento das relações científicas e para a identificação de oportunidades de integração entre pesquisadores.
