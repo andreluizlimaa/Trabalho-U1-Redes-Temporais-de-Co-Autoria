@@ -13,6 +13,11 @@ Neste projeto, foi realizada uma análise das redes de colaboração científica
 O principal objetivo foi reforçar os conceitos relacionados a grafos por meio da aplicação prática da biblioteca NetworkX, da linguagem Python. Esta atividade foi desenvolvida no contexto da disciplina de **Algoritmos e Estruturas de Dados II**.
 
 ***
+## Vídeo Explicativo
+
+https://drive.google.com/file/d/1ZqzHQhaWoUy5bkW4rtrRRgVulWj_W4BY/view
+
+***
 
 ## Ferramentas e Bibliotecas Utilizadas
 
